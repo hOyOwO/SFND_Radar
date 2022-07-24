@@ -1,0 +1,21 @@
+% TODO : Find the Bsweep of chirp for 1 m resolution
+c = 3 * 10^8;
+dres = 1;
+
+%dres = c / (2 * Bsweep);
+Bsweep = c / (2 * dres);
+
+
+% TODO : Calculate the chirp time based on the Radar's Max Range
+Rmax = 300;
+Tchirp = 5.5 * 2 * Rmax / c;
+
+% TODO : define the frequency shifts 
+fb = [1*10^6, 1.1*10^6, 13*10^6, 24*10^6];
+
+
+calculated_range = c * Tchirp * fb / (2 * Bsweep);
+
+
+% Display the calculated range
+disp(calculated_range);
