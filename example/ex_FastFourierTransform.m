@@ -4,9 +4,11 @@ L = 1500;             % Length of signal
 t = (0:L-1)*T;        % Time vector
 
 % TODO: Form a signal containing a 77 Hz sinusoid of amplitude 0.7 and a 43Hz sinusoid of amplitude 2.
-A = 0.7;
-f = 43;
-S = A * sin(2 * pi * f * t);
+A1 = 0.7;
+A2 = 2;
+f1 = 77;
+f2 = 43;
+S = A1 * sin(2 * pi * f1 * t) + A2 * sin(2 * pi * f2 * t);
 
 
 % Corrupt the signal with noise 
@@ -22,7 +24,7 @@ ylabel('X(t)')
 S_fft = fft(X);
 
 % TODO : Compute the two-sided spectrum P2. Then compute the single-sided spectrum P1 based on P2 and the even-valued signal length L.
-P2 = abs(S_fft);
+P2 = abs(S_fft/L);
 P1 = P2(1:L/2+1);
 
 % Plotting
