@@ -162,13 +162,13 @@ figure,surf(doppler_axis,range_axis,RDM);
 
 % *%TODO* :
 %Select the number of Training Cells in both the dimensions.
-Tr = 20;
-Td = 10;
+TrainingCellRows = 1;
+TrainingCellColumns = 2;
 % *%TODO* :
 %Select the number of Guard Cells in both dimensions around the Cell under 
 %test (CUT) for accurate estimation
-Gr = 10;
-Gd = 5;
+GuardCellRows = 1;
+GuardCellColumns = 2;
 
 % *%TODO* :
 % offset the threshold by SNR value in dB
@@ -176,7 +176,7 @@ offset = 5;
 
 % *%TODO* :
 %Create a vector to store noise_level for each iteration on training cells
-noise_level = zeros(Nr/2-(2*Gr+2*Tr+1), Nd-(2*Gd+2*Td+1));
+noise_level = zeros(1,1);
 
 
 % *%TODO* :
@@ -199,22 +199,13 @@ noise_level = zeros(Nr/2-(2*Gr+2*Tr+1), Nd-(2*Gd+2*Td+1));
 % all rows = (TrainingCellRows + GuardCellRows) * 2 + 1
 % sum (all columns * all rows) - sum (2 * GuardCellColumns + 1 ) * ( 2 * GuardCellRows +1) 
 
-size_T = (2*(Tr+Gr)+1) * (2*(Td+Gd)+1) - (2*Gr+1) * (2*Gd+1);
-threshold_CFAR = zeros(Nr/2-(2*Gr+2*Tr+1), Nd-(2*Gd+2*Td+1));
-signal_CFAR = zeros(Nr/2, Nd);
 
-for i = 1:(Nr/2-(2*Gr+2*Tr+1))
-    for j = 1:(Nd-(2*Gd+2*Td+1))
-        noise_T = sum(db2pow(RDM(i:i+2*Tr+2*Gr-1, j:j+2*Td+2*Gd-1)), 'all');
-        noise_G = sum(db2pow(RDM(i+Tr:i+Tr+2*Gr-1, j+Td:j+Td+2*Gd-1)), 'all');
-        noise_level(i,j) = noise_T - noise_G;
-        threshold_CFAR(i,j) = pow2db(noise_level(i,j)/size_T) + offset;
-
-        if RDM(i+Tr+Gr,j+Td+Gd) > threshold_CFAR(i,j)
-            signal_CFAR(i+Tr+Gr,j+Td+Gd) = 1;
-        end
-    end
+for j=1:         
+      
+    
+    
 end
+
 
 
 % *%TODO* :
@@ -234,7 +225,7 @@ end
 % *%TODO* :
 %display the CFAR output using the Surf function like we did for Range
 %Doppler Response output.
-figure,surf(doppler_axis,range_axis,signal_CFAR);
+figure,surf(doppler_axis,range_axis,'replace this with output');
 colorbar;
 
 
